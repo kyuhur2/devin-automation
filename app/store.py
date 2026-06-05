@@ -33,3 +33,19 @@ class TaskStore:
         data[task.task_id] = task.model_dump()
         self._write(data)
         return task
+
+    def delete_task(self, task_id: str) -> bool:
+        data = self._read()
+
+        if task_id not in data:
+            return False
+
+        del data[task_id]
+        self._write(data)
+        return True
+
+    def clear_tasks(self) -> int:
+        data = self._read()
+        deleted_count = len(data)
+        self._write({})
+        return deleted_count
