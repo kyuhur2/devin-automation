@@ -29,7 +29,7 @@ def now_iso() -> str:
 
 def build_devin_prompt(issue_url: str, repo: str) -> str:
     return f"""
-    You are working on a Cognition take-home demo.
+    You are working on a task.
 
     Target repository:
     {repo}
