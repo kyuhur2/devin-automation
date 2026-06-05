@@ -236,3 +236,26 @@ async def refresh_task(task_id: str) -> Task:
         task.error = str(exc)
         store.upsert_task(task)
         return task
+
+
+@app.delete("/tasks/{task_id}")
+def delete_task(task_id: str) -> dict[str, str]:
+    deleted = store.delete_task(task_id)
+
+    if not deleted:
+        raise HTTPException(status_code=404, detail="task not found")
+
+    return {
+        "status": "deleted",
+        "task_id": task_id,
+    }
+
+
+@app.delete("/tasks")
+def clear_tasks() -> dict[str, int | str]:
+    deleted_count = store.clear_tasks()
+
+    return {
+        "status": "cleared",
+        "deleted_count": deleted_count,
+    }
