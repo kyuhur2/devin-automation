@@ -16,7 +16,7 @@ app = FastAPI(
     version="0.1.0",
 )
 
-TARGET_REPO = os.environ.get("TARGET_REPO", "kyuhur2/superset-devin")
+TARGET_REPO = os.environ.get("TARGET_REPO", "kyuhur2/superset")
 TRIGGER_LABEL = os.environ.get("TRIGGER_LABEL", "devin-fix")
 TASK_STORE_PATH = os.environ.get("TASK_STORE_PATH", ".data/tasks.json")
 
@@ -143,14 +143,14 @@ async def simulate(request: SimulateRequest) -> Task:
     Example:
     curl -X POST http://localhost:8000/simulate \\
       -H 'Content-Type: application/json' \\
-      -d '{"issue_url":"https://github.com/kyuhur2/superset-devin/issues/1"}'
+      -d '{"issue_url":"https://github.com/kyuhur2/superset/issues/1"}'
     """
     repo = request.repo or TARGET_REPO
 
     if "/" not in repo:
         raise HTTPException(
             status_code=400,
-            detail="repo must be a full GitHub repo name, e.g. kyuhur2/superset-devin",
+            detail="repo must be a full GitHub repo name, e.g. kyuhur2/superset",
         )
 
     return await start_devin_for_issue(issue_url=request.issue_url, repo=repo)
