@@ -6,7 +6,7 @@ This project demonstrates how Devin can be used as an autonomous engineering pri
 
 ## Workflow
 
-1. Github issue in kyuhur2/superset-devin
+1. Github issue in public repo (forked `apache/superset` in this case; `kyuhur2/superset`)
 2. Issue gets label: `devin-fix`
 3. Github webhook calls this service
 4. This service (hosted on [Render](https://render.com/)) calls Devin API
